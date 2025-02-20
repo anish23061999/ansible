@@ -1,0 +1,18 @@
+---
+- name: Playbook to restart single or multiple services
+  hosts: myhosts
+  become: yes
+  vars:
+    services: [] # default empty list for services
+  tasks:
+    - name: Validate services variable provided and not empty
+      fail:
+        msg: "You must provide at least one service and pass it as --extra-vars"
+      when: services | length == 0
+
+    - name: Restart the specified services
+      ansible.builtin.service:
+        name: "{{ item }}"
+        state: restarted
+      loop: "{{ services }}"
+

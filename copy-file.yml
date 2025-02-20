@@ -1,0 +1,14 @@
+---
+- name: Copy file from source to destination
+  hosts: myhosts
+  become: yes
+  tasks:
+  - name: Copy file
+    copy:
+     src: /home/vboxuser/ansible_quickstart/myfile.txt
+     dest: /home/myuser
+     owner: myuser
+     group: myuser
+     mode: u=rwx,g=rw,o=r
+### If you need to create backup of file you are copying from ansible to remote server make backup as true
+     backup: true  

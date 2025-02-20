@@ -1,0 +1,13 @@
+---
+- name: Delete File and Directory on Remote Server
+  hosts: myhosts
+  tasks:
+    - name: Delete a file
+      file: 
+       path: /home/myuser/newFile.txt
+       state: absent
+
+    - name: Delete a directory
+      file:
+       path: /home/myuser/newDir
+       state: absent     

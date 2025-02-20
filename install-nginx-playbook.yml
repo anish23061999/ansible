@@ -1,0 +1,28 @@
+---
+- name: Install NGINX
+  hosts: mic
+  become: yes
+  tasks:
+    - name: Install NGINX on Debian/Ubuntu
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Install NGINX on CentOS/RHEL
+      yum:
+        name: nginx
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Start NGINX service
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Ensure NGINX is running
+      service:
+        name: nginx
+        state: started
+
